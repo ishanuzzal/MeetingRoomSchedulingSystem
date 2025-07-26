@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model DataAccess.ViewModel.Login
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Meeting_Scheduling_System</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Meeting_Scheduling_System.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container mt-5 py-3 w-25" id="login" style="box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);">
+        @if (TempData["message"] != null)
+        {
+            <p class="text-danger">@TempData["message"]</p>
+        }
+        <h2>Login</h2>
+        <form class="login-form" asp-action="Login" method="post" class="needs-validation" novalidate>
+            <div asp-validation-summary="All" class="text-danger">
+               
+            </div>
+            <div class="mb-3 form-group">
+                <label for="Email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="Email" asp-for="Email">
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+
+            <div class="mb-3 form-group">
+                <label for="Password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="Password" asp-for="Password">
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+            <a asp-action="ResetPasswordRequestWithEmail" class="text-warning py-1">Password Reset Request</a>
+            <br />
+            <button type="submit" class="btn btn-primary my-3">Login</button>
+        </form>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    </body>
+</html>
+

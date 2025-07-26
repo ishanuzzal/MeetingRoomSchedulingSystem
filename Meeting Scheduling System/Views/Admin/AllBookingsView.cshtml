@@ -1,0 +1,109 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    int serialNumber = 1;
+}
+@model DataAccess.ViewModel.PaginatedViewModel.BookingAllDetailsPaginatedView
+
+<div class="w-75 my-5">
+    @if (TempData["message"] != null || TempData["error"] != null)
+    {
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Delete success</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Something went wrong</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+    }
+    <h2>All Bookings</h2>
+    <form asp-controller="Admin" asp-action="AllBookingsView" method="get" class="py-2">
+         <input name="EmpId" asp-for="@Model.EmpId" class="w-25" value="" placeholder="Search by Employee Id" />
+         <button type="submit" class="btn btn-info">Search</button>
+    </form>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">SN</th>
+                <th scope="col">User</th>
+                <th scope="col">Employee Id</th>
+                <th scope="col">Purpose</th>
+                <th scope="col">
+                    <a class="text-dark" href="@Url.Action("AllBookingsView", "Admin", new {EmpId=Model.EmpId, orderBy = Model.OrderBy == "date_asc" ? "date_desc" : "date_asc", currentPage = Model.CurrentPage })">
+                        Start Time
+                        @if (Model.OrderBy == "date_asc")
+                        {
+                            <i class="fas fa-sort-up"></i>
+                        }
+                        else
+                        {
+                            <i class="fas fa-sort-down"></i>
+                        }
+                    </a>
+                </th>
+                <th scope="col">End Time</th>
+                <th scope="col">Floor</th>
+                <th scope="col">Room</th>
+                <th scope="col">Participations</th>
+                <th scope="col">Status</th>
+                <th scope="col">Deleted</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var item in Model.bookingAllDetailsViews)
+                {
+                    <tr>
+                        <th scope="row">@serialNumber</th>
+                        <td>@item.UserName</td>
+                        <td>@item.EmpId</td>
+                        <td>@item.Purpose</td>
+                        <td>@item.StartTime.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@item.EndTime.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@item.Floor</td>
+                        <td>@item.RoomName</td>
+                        <td>@item.NumberOfParticipation</td>
+                        <td>@item.Status</td>
+                        @if (item.IsDeleted == true)
+                        {
+                            <td>Yes</td>
+                        }
+                        else
+                        {
+                            <td>No</td>
+                        }
+                    </tr>
+                    serialNumber++;
+                }
+            }
+        </tbody>
+    </table>
+
+    @if (Model!=null && Model.TotalPages > 1)
+    {
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("AllBookingsView", "Admin", new {EmpId=Model.EmpId, orderBy = Model.OrderBy, currentPage = i })">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+
+</div>

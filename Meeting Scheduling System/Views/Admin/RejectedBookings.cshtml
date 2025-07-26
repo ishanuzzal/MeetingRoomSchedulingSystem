@@ -1,0 +1,81 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    int serialNumber = 1;
+}
+@model List<DataAccess.ViewModel.admin.BookingAllDetailsView>
+
+
+
+<div class="w-100 my-5">
+    @if (TempData["message"] != null || TempData["error"] != null)
+    {
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Delete success</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>@TempData["error"]</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+    }
+    <h2>Rejected Bookings</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">SN</th>
+                <th scope="col">User</th>
+                <th scope="col">Employee Id</th>
+                <th scope="col">Requested At</th>
+                <th scope="col">Purpose</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Floor</th>
+                <th scope="col">Room</th>
+                <th scope="col">Participations</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@serialNumber</th>
+                        <td>@item.UserName</td>
+                        <td>@item.EmpId</td>
+                        <td>@item.RequestedAtUtc</td>
+                        <td>@item.Purpose</td>
+                        <td>@item.StartTime.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@item.EndTime.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@item.Floor</td>
+                        <td>@item.RoomName</td>
+                        <td>@item.NumberOfParticipation</td>
+                        <td>@item.Status</td>
+                        <td>
+                            <form method="POST" asp-controller="Admin" asp-action="DeleteRejectedBooking" asp-route-id="@item.Id">
+                                <button class="btn btn-danger">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    serialNumber++;
+                }
+            }
+        </tbody>
+    </table>
+</div>

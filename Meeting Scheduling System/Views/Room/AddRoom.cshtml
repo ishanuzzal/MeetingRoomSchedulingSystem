@@ -1,0 +1,66 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model DataAccess.ViewModel.Room.AddRoomView
+
+<div class="w-75">
+    <h2>Add Room</h2>
+    <form asp-controller="Room" asp-action="AddRoom" method="post" enctype="multipart/form-data">
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <small class="text-danger">@TempData["ErrorMessage"]</small>
+        }
+
+        <div class="form-group">
+            <label asp-for="Floor" class="control-label"></label>
+            <input asp-for="Floor" class="form-control" />
+            <span asp-validation-for="Floor" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="RoomName" class="control-label"></label>
+            <input asp-for="RoomName" class="form-control" />
+            <span asp-validation-for="RoomName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Capacity" class="control-label"></label>
+            <input asp-for="Capacity" class="form-control" />
+            <span asp-validation-for="Capacity" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="MinPersonLimit" class="control-label"></label>
+            <input asp-for="MinPersonLimit" class="form-control" />
+            <span asp-validation-for="MinPersonLimit" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Facilities" class="control-label"></label>
+            <input asp-for="Facilities" class="form-control" />
+            <span asp-validation-for="Facilities" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ColorCode">Select color:</label>
+            <input type="color" asp-for="ColorCode" value="#ff0000">
+        </div>
+
+        <div class="my-2">
+            <label asp-for="Image" class="control-label"></label>
+            <input asp-for="Image" id="image" class="form-control" accept=".jpg,.jpeg,.png" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+
+
+

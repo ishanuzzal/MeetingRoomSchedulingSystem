@@ -1,0 +1,89 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    int serialNumber = 1;
+}
+@model List<DataAccess.ViewModel.admin.UserView>;
+
+<div class="w-70">
+        <div class="card">
+            <h5 class="card-header">Add Users From CSV</h5>
+            <div class="card-body pb-0">
+                <form action="UploadCsvFile" method="post" enctype="multipart/form-data">
+                    <label for="file">CSV:</label>
+                    <input type="file" name="file" id="file" accept=".csv">
+                    <br />
+                    <button class="btn btn-primary my-2" type="submit" id="upload">Upload</button>
+                </form>
+            </div>
+        </div>
+
+    @if (TempData["error"] != null)
+    {
+        <h3 class="text-danger mt-2">@TempData["error"]</h3>
+    }
+
+    @if (Model != null)
+    {
+        <form method="post" action="CSVRegisteredUser">
+            <table class="table table-bordered mt-4">
+                <thead>
+                    <tr>
+                        <th scope="col">SN</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Employee Id</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Designation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <th scope="row">@serialNumber</th>
+                            <td class="@(Model[i].IsDuplicate==true ? "text-danger":"")">
+                                <input type="hidden" name="userViews[@i].Email" value="@Model[i].Email" />
+                                @Model[i].Email
+                            </td>
+                            <td>
+                                <input type="hidden" name="userViews[@i].Password" value="@Model[i].Password" />
+                                @Model[i].Password
+                            </td>
+                            <td>
+                                <input type="hidden" name="userViews[@i].EmpId" value="@Model[i].EmpId" />
+                                @Model[i].EmpId
+                            </td>
+                            <td>
+                                <input type="hidden" name="userViews[@i].FullName" value="@Model[i].FullName" />
+                                @Model[i].FullName
+                            </td>
+                            <td>
+                                <input type="hidden" name="userViews[@i].Role" value="@Model[i].Role" />
+                                @Model[i].Role
+                            </td>
+                            <td>
+                                <input type="hidden" name="userViews[@i].Department" value="@Model[i].Department" />
+                                @Model[i].Department
+                            </td>
+                            <td>
+                                <input type="hidden" name="userViews[@i].Designation" value="@Model[i].Designation" />
+                                @Model[i].Designation
+                            </td>
+                        </tr>
+                        serialNumber++;
+                    }
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+      
+    }
+</div>
+
+    
+
+

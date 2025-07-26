@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model DataAccess.ViewModel.admin.SystemSettingView;
+
+<div class="w-75 py-3">
+    @if (Model != null)
+    {
+        <h3 class="px-3">System Settign</h3>
+        <div class="card">
+            <h5 class="card-header">Meeting Time Limit</h5>
+            <div class="card-body">
+                <p>Minimum Meeting time @Model.MinimumMeetingTime</p>
+                <p>Maximum Meeting time @Model.MaximumMeetingTime</p>
+                <a asp-controller="Admin" asp-action="ChangeMeetingTime" class="btn btn-primary">Change</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        @if (TempData["error"] != null)
+        {
+            <h2>@TempData["error"]</h2>
+        }
+    }
+</div>

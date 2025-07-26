@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model DataAccess.ViewModel.admin.UpdateMeetingTimeView;
+
+<div class="w-75 py-3">
+    @if (TempData["error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["error"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    <div class="card">
+        <h5 class="card-header">Meeting Time Limit</h5>
+        <div class="card-body">
+            <form method="post" asp-controller="Admin" asp-action="ChangeMeetingTime">
+                <label for="minTime">Minimum Meeting Time:</label>
+                <select id="minTime" name="minTime" asp-for="@Model.SelectedMinTime" required>
+                @foreach(var interval in Model.MinimumMeetingTime)
+                {
+                    <option value="@interval">@interval</option>
+                }
+                </select>
+
+                <label for="maxTime">Maximum Meeting Time:</label>
+                <select id="maxTime" name="maxTime" asp-for="@Model.SelectedMaxTime" required>
+                @foreach (var interval in Model.MaximumMeetingTime)
+                {
+                    var isSelected = interval == Model.SelectedMaxTime ? "selected" : "";
+                    <option value="@interval" isSelected>@interval</option>
+                }
+                </select>
+                <br />
+                <button class="btn btn-primary my-2" type="submit">Update</button>
+            </form>
+        </div>
+    </div>
+</div>

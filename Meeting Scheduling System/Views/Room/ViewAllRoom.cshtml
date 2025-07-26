@@ -1,0 +1,136 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    int serialNumber = 1;
+}
+@model List<DataAccess.ViewModel.Room.ShowRoomView>
+
+<div class="w-75 my-5">
+    @if (TempData["message"]!=null || TempData["error"] != null)
+    {
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>@TempData["message"]</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        else{
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>@TempData["error"]</strong> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }     
+    }
+
+    <a asp-controller="Room" asp-action="AddRoom" class="btn btn-secondary btn-lg my-3">Add Room</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">SN</th>
+                <th scope="col">Floor</th>
+                <th scope="col">Room Name</th>
+                <th scope="col">Capacity</th>
+                <th scope="col">Color</th>
+                <th scope="col">Minimum Person Limit</th>
+                <th scope="col">Facilities</th>
+                <th scope="col">QR Code</th>
+                <th scope="col">Picture</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@serialNumber</th>
+                        <td>@item.Floor</td>
+                        <td>@item.RoomName</td>
+                        <td>@item.Capacity</td>
+                        <td><div style="background-color:@item.ColorCode; width:20px; height:20px"></div></td>
+                        <td>@item.MinPersonLimit</td>
+                        <td>@item.Facilities</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.QRCode))
+                            {
+                                <a href="@item.QRCode" data-toggle="modal" data-target="#downloadModal" data-qrcode="@item.QRCode" class="qr-code-link">
+                                    <img src="@Url.Content("~/images/" + item.QRCode)" alt="Room Image" style="width:80px; height:80px;" />
+                                </a>
+                                
+                            }
+                            else
+                            {
+                                <span>No Image Available</span>
+                            }
+                        </td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.ImageName))
+                            {
+                                <img src="@Url.Content("~/images/" + item.ImageName)" alt="Room Image" style="width:80px; height:80px;" />
+                            }
+                            else
+                            {
+                                <span>No Image Available</span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-controller="Room" asp-action="EditRoom" asp-route-id="@item.Id" class="btn btn-warning  mx-2">Edit Room</a>
+                            <form asp-controller="Room" method="post" asp-action="DeleteRoom" asp-route-id="@item.Id" style="display: inline-block;">
+                                <button type="submit" class="btn btn-danger  mx-2">Delete Room</button>
+                            </form>
+                        </td>
+                    </tr>
+                    serialNumber++;
+                }
+            }
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-labelledby="downloadModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="downloadModalLabel">Download QR Code</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to download this QR Code?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <a id="downloadQrCodeLink" class="btn btn-primary" download>Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#downloadModal').on('show.bs.modal', function (event) {
+                const downloadLink = $("#downloadQrCodeLink")[0];
+                const button = $(event.relatedTarget);
+                const qrCode = button.data('qrcode');
+                downloadLink.href = '/images/' + qrCode;
+                downloadLink.setAttribute('download', qrCode);
+            });
+
+            $('#downloadQrCodeLink').on('click', function () {
+                $('#downloadModal').modal('hide');
+            });
+        });
+    </script>
+}
+
+

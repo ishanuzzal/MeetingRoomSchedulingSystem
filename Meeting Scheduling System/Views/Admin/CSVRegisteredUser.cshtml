@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewData["Title"] = "CSVRegisteredUser";
+    int serialNumber = 1;
+    int serialNumber2 = 1;
+}
+@model DataAccess.ViewModel.admin.AcceptedRejectedUserView;
+
+<div class="w-75 my-5">
+    @if (TempData["message"] != null || TempData["error"] != null)
+    {
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>@TempData["message"]</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>@TempData["error"]</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+    }
+
+    @if (Model.AcceptedUserView != null && Model.AcceptedUserView.Any())
+    {
+        <h3>Accepted User View</h3>
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">SN</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Employee Id</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Designation</th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model.AcceptedUserView)
+            {
+                <tr>
+                    <th scope="row">@serialNumber</th>
+                    <td>@item.Email</td>
+                    <td>@item.EmpId</td>
+                    <td>@item.FullName</td>
+                    <td>@item.Role</td>
+                    <td>@item.Department</td>
+                    <td>@item.Designation</td>
+                </tr>
+                serialNumber++;
+            }
+        </table>
+    }
+
+    @if (Model.RejectedUserView != null && Model.RejectedUserView.Any())
+    {
+        <br />
+        <h3>Rejected User View</h3>
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">SN</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Employee Id</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Designation</th>
+                    <th scope="col">Issues</th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model.RejectedUserView)
+            {
+                <tr>
+                    <th scope="row">@serialNumber2</th>
+                    <td>@item.Email</td>
+                    <td>@item.Password</td>
+                    <td>@item.EmpId</td>
+                    <td>@item.FullName</td>
+                    <td>@item.Role</td>
+                    <td>@item.Department</td>
+                    <td>@item.Designation</td>
+                    <td>@item.Issues</td>
+                </tr>
+                serialNumber2++;
+            }
+        </table>
+    }
+
+ </div>
+

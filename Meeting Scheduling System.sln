@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meeting Scheduling System", "Meeting Scheduling System\Meeting Scheduling System.csproj", "{994182C7-6557-4DB2-B029-3E1BDBB98366}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{3BC838B2-8EEB-4226-BC6C-5227A580F34E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{61544390-0B41-42BD-8CD1-7816823B99DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{994182C7-6557-4DB2-B029-3E1BDBB98366}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{994182C7-6557-4DB2-B029-3E1BDBB98366}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{994182C7-6557-4DB2-B029-3E1BDBB98366}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{994182C7-6557-4DB2-B029-3E1BDBB98366}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BC838B2-8EEB-4226-BC6C-5227A580F34E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BC838B2-8EEB-4226-BC6C-5227A580F34E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BC838B2-8EEB-4226-BC6C-5227A580F34E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BC838B2-8EEB-4226-BC6C-5227A580F34E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61544390-0B41-42BD-8CD1-7816823B99DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61544390-0B41-42BD-8CD1-7816823B99DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61544390-0B41-42BD-8CD1-7816823B99DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61544390-0B41-42BD-8CD1-7816823B99DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E756383-195D-4AFF-AF48-B1E9AD161A0C}
+	EndGlobalSection
+EndGlobal

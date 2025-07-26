@@ -1,0 +1,71 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    int serialNumber = 1;
+}
+@model List<DataAccess.ViewModel.User.AllUsersView>
+
+<div class="w-75 my-5">
+    @if (TempData["message"] != null || TempData["error"] != null)
+    {
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>@TempData["message"]</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>@TempData["error"]</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+
+    }
+    <a asp-controller="Auth" asp-action="Registration" class="btn btn-secondary btn-lg my-3">Registration</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">SN</th>
+                <th scope="col">User Name</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Employee Id</th>
+                <th scope="col">Role</th>
+                <th scope="col">Designation</th>
+                <th scope="col">Department</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@serialNumber</th>
+                    <td>@item.UserName</td>
+                    <td>@item.FullName</td>
+                    <td>@item.EmpId</td>
+                    <td>@item.RoleName</td>
+                    <td>@item.DesignationName</td>
+                    <td>@item.DepartmentName</td>
+
+                    <td>
+                        <a asp-controller="Auth" asp-action="EditUser" asp-route-id="@item.Id" class="btn btn-warning  mx-2">Edit User</a>
+                        <form asp-controller="Auth" method="POST" asp-action="DeleteUser" asp-route-id="@item.Id" style="display: inline-block;">
+                            <button type="submit" class="btn btn-danger  mx-2">Delete User</button>
+                        </form>
+                    </td>
+                </tr>
+                serialNumber++;
+            }
+
+        </tbody>
+    </table>
+</div>

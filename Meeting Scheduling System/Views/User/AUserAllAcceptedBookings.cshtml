@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "AUserAllAcceptedBookings";
+}
+
+@{
+    int serialNumber = 1;
+}
+
+@model List<DataAccess.ViewModel.User.AUserBookingView>
+
+<div class="container my-5">
+    <h2>All Accepted Bookings</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">SN</th>
+                <th scope="col">Purpose</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Floor</th>
+                <th scope="col">Room</th>
+                <th scope="col">Participations</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@serialNumber</th>
+                        <td>@item.Purpose</td>
+                        <td>@item.StartTime.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@item.EndTime.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@item.Floor</td>
+                        <td>@item.RoomName</td>
+                        <td>@item.NumberOfParticipation</td>
+                        <td>@item.Status</td>
+                    </tr>
+                    serialNumber++;
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

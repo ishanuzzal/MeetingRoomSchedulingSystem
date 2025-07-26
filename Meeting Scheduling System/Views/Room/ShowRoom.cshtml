@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewData["Title"] = "ShowRoom";
+}
+
+@model DataAccess.ViewModel.Room.ShowRoomView
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Meeting Scheduling System</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h3 class="mb-0">@Model.RoomName</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped table-hover">
+                            <tbody>
+                                <tr>
+                                    <th scope="row" class="w-50">Floor</th>
+                                    <td>@Model.Floor</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Capacity</th>
+                                    <td>@Model.Capacity</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Minimum Person Limit</th>
+                                    <td>@Model.MinPersonLimit</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Facilities</th>
+                                    <td>@Model.Facilities</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
+
+

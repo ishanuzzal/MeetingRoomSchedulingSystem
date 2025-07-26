@@ -1,0 +1,94 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    
+}
+@model DataAccess.ViewModel.Registration
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Meeting_Scheduling_System</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Meeting_Scheduling_System.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="w-75">
+        <h2>Register User</h2>
+        <form asp-controller="Auth" asp-action="Registration" method="post" class="needs-validation" novalidate>
+            @if (TempData["error"] != null)
+            {
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    @TempData["error"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+            <div class="mb-1 form-group">
+                <label for="Email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="Email" asp-for="Email">
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+
+            <div class="mb-1  form-group">
+                <label for="Password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="Password" asp-for="Password">
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+
+            <div class="mb-1  form-group">
+                <label for="ConfirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="ConfirmPassword" asp-for="ConfirmPassword">
+                <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+            </div>
+
+            <div class="mb-1  form-group">
+                <label asp-for="EmpId" class="form-label">Employee Id</label>
+                <input type="number" class="form-control" id="EmpId" asp-for="EmpId">
+                <span class="text-danger" asp-validation-for="EmpId"></span>
+            </div>
+
+            <div class="mb-1  form-group">
+                <label asp-for="FullName" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="FullName" asp-for="FullName">
+                <span class="text-danger" asp-validation-for="FullName"></span>
+            </div>
+
+            <div class="mb-1 form-group">
+                <label for="SelectedDepartment" class="form-label">Department</label>
+                <select class="form-control" id="SelectedDepartment" asp-for="SelectedDepartment" asp-items="Model.Departments">
+                    <option value="">-- Select Department --</option>
+                </select>
+                <span class="text-danger" asp-validation-for="SelectedDepartment"></span>
+            </div>
+
+            <div class="mb-1 form-group">
+                <label for="SelectedDesignation" class="form-label">Designation</label>
+                <select class="form-control" id="SelectedDesignation" asp-for="SelectedDesignation" asp-items="Model.Designations">
+                    <option value="">-- Select Designation --</option>
+                </select>
+                <span class="text-danger" asp-validation-for="SelectedDesignation"></span>
+            </div>
+
+            <div class="mb-1 form-group">
+                <label for="SelectedRole" class="form-label">Role</label>
+                <select class="form-control" id="SelectedRole" asp-for="SelectedRole" asp-items="Model.Roles">
+                    <option value="">-- Select Role --</option>
+                </select>
+                <span class="text-danger" asp-validation-for="SelectedRole"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+</body>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+</html>
