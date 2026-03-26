@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Routing.Constraints;
 using DataAccess.Attributes;
 using Microsoft.Extensions.Caching.Distributed;
 using DataAccess.Extension;
+using static QRCoder.PayloadGenerator;
 
 namespace Service.Services
 {
